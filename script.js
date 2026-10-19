@@ -1,22 +1,27 @@
-
-let count = 0;
-
 const countElement = document.getElementById("count");
 
+// Загружаем сохранённое значение или начинаем с нуля
+let count = Number(localStorage.getItem("counter")) || 0;
+
+// Обновляем экран и сохраняем значение
 function updateCount() {
     countElement.textContent = count;
+    localStorage.setItem("counter", count);
 }
 
+// Увеличение
 document.getElementById("plus").addEventListener("click", () => {
     count++;
     updateCount();
 });
 
+// Уменьшение
 document.getElementById("minus").addEventListener("click", () => {
     count--;
     updateCount();
 });
 
+// Сброс
 document.getElementById("reset").addEventListener("click", () => {
     count = 0;
     updateCount();
@@ -28,3 +33,6 @@ if (window.Telegram?.WebApp) {
     tg.ready();
     tg.expand();
 }
+
+// Показываем начальное значение
+updateCount();
